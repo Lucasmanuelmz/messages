@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Table</title>
+    <link href="./output.css" rel="stylesheet">
+    <style>
+        .max-height-ads {
+            max-height: 400px; 
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+  <div class="container mx-auto top-72   flex flex-wrap px-4 py-8 relative  left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    
+    <div class="max-height-ads max-h-96 mr-5 rounded-lg over bg-white shadow-md overflow-y-scroll">
+      <% messages.forEach(message => { %>
+        <div class="message px-4 py-2 max-w-xl  bg-green-100 mb-2 rounded-lg">
+          <p class="text-sm font-semibold text-green-800"><%= message.user %></p>
+          <p class="text-sm text-green-900"><%= message.text %></p>
+          <p class="text-xs text-right text-gray-500"><%= message.createdAt.getSeconds() %> s</p>
+        </div>
+      <% }) %>
+    </div>
+
+    <form method="post" action="/new" class="mt-4 flex flex-col bg-white rounded-lg shadow-md p-4">
+      <div class="relative mt-2 rounded-md shadow-sm">
+        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+          <label for="user" class="text-gray-500 sm:text-sm">Name:</label>
+        </div>
+        <input type="text" name="user" id="user" class="block w-full rounded-md border-0 py-1.5 pl-16 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+      </div>
+
+      <label for="about" class="block mt-2 text-sm font-medium leading-6 text-gray-600">Message</label>
+      <textarea id="text" name="text" rows="3" placeholder="Message" class="block w-full rounded-md border-0 py-1.5 pl-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+
+      <div class="mt-4 flex items-center justify-end">
+        <button type="submit" class="rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">Send</button>
+      </div>
+    </form>
+  </div>
+
+  
+  <script>
+    
+    const messageContainer = document.querySelector('.max-height-ads');
+    
+    messageContainer.scrollTop = messageContainer.scrollHeight;
+  </script>
+</body>
+</html>
